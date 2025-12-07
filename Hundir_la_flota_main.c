@@ -4,7 +4,6 @@
 
 typedef char Tablero[TAM][TAM];
 
-/* Prototipos */
 void mostrarMenu(void);
 int leerOpcion(void);
 void jugar(void);
