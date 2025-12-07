@@ -7,7 +7,7 @@ typedef char Tablero[TAM][TAM];
 void mostrarMenu(void);
 int leerOpcion(void);
 void jugar(void);
-void verScoreboard(void);
+void verPuntuaciones(void);
 
 void inicializarTablero(Tablero t);
 void mostrarTablero(const Tablero t);
@@ -28,7 +28,7 @@ int main(void) {
                 jugar();
                 break;
             case 2:
-                verScoreboard();
+                verPuntuaciones();
                 break;
             case 3:
                 printf("Saliendo del juego...\n");
@@ -45,7 +45,7 @@ int main(void) {
 void limpiarBuffer(void) {
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {
-        /* nada */
+        /* vaciar caracteres pendientes */
     }
 }
 
@@ -104,8 +104,8 @@ void jugar(void) {
     getchar();  /* espera un ENTER */
 }
 
-/* Opcion Puntuaciones */
-void verScoreboard(void) {
+/* Opcion Puntuaciones (por ahora solo mensaje) */
+void verPuntuaciones(void) {
     printf("\n=== PUNTUACIONES ===\n");
     printf("Esta parte no esta implementada todavia.\n");
     printf("Pulsa ENTER para volver al menu...\n");
@@ -146,8 +146,7 @@ void mostrarTablero(const Tablero t) {
 }
 
 /* Pide al jugador que coloque todos sus barcos.
-   Ahora primero pregunta QUÉ BARCO quieres colocar,
-   luego FILA, luego COLUMNA (y luego orientación). */
+   Primero pregunta que barco, luego fila, columna y orientacion. */
 void colocarBarcos(Tablero t) {
     int portavionesColocados = 0;
     int crucerosColocados   = 0;
@@ -215,8 +214,7 @@ void colocarBarcos(Tablero t) {
             continue;
         }
 
-        /* Intentar colocar ese barco concreto.
-           Dentro se pregunta primero FILA, luego COLUMNA y luego ORIENTACION. */
+        /* Intentar colocar ese barco concreto */
         if (colocarBarco(t, longitud, simbolo, nombre)) {
             if (simbolo == 'A') {
                 portavionesColocados++;
@@ -236,10 +234,6 @@ void colocarBarcos(Tablero t) {
 }
 
 /* Coloca un solo barco.
-   Aquí se pregunta:
-     1) fila
-     2) columna
-     3) orientación
    Devuelve 1 si se coloco bien, 0 si hubo error. */
 int colocarBarco(Tablero t, int longitud, char simbolo, const char *nombre) {
     int fila, col;
